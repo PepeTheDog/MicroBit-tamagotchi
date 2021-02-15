@@ -29,10 +29,11 @@ while True:
     if running_time() - toy_timer >= 1000:
         toy_timer = 0
         toy = 0
-    if running_time() - time == 100:
+    if running_time() - time >= 100:
         time = running_time()
         if state == "happy":
             display.show(happy)
+            state_changer = 0
         if state == "happy" and state_changer == 0:
             state_changer = random.randint(1, 1102)
         if state == "happy" and state_changer <= 51:
