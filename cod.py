@@ -17,16 +17,20 @@ dead = Image("00000:" "66066:" "00000:" "06660:" "00000:")
 if button_a.is_pressed():
     food_timer = running_time()
     food = 1
-    
+    display.show("a")
+    sleep(100)
+
 if button_b.is_pressed():
     toy_timer = running_time()
     toy = 1
+    display.show("b")
+    sleep(100)
 
 while True:
-    if running_time() - food_timer >= 1000:
+    if food == 1 and running_time() - food_timer >= 1000:
         food_timer = 0
         food = 0
-    if running_time() - toy_timer >= 1000:
+    if toy == 1 and running_time() - toy_timer >= 1000:
         toy_timer = 0
         toy = 0
     if running_time() - time >= 100:
@@ -43,21 +47,22 @@ while True:
             state = "sad"
             time = running_time()
         state_changer = 0
+        # happy
         if state == "hungry":
             display.show(hungry)
         if state == "hungry" and food == 0:
             if running_time() - time >= 5000:
-                time = running_time()
                 state = "dead"
         elif state == "hungry" and food == 1:
             state = "happy"
+        # hungry
         if state == "sad":
             display.show(sad)
         if state == "sad" and toy == 0:
             if running_time() - time >= 5000:
-                time = running_time()
                 state = "dead"
         elif state == "sad" and toy == 1:
             state = "happy"
+        # sad
         if state == "dead":
             display.show(dead)
